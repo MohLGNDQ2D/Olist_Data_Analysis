@@ -70,8 +70,7 @@ Olist_Data_Analysis/
 │   └── delivery_analysis.sql          # استعلام SQL لاستخراج أيام التوصيل والتقييمات
 │
 ├── notebooks/
-│   ├── delivery_analysis.ipynb        # مفكرة Jupyter للتحليل الاستكشافي والرسومات البيانية
-│   └── analyze_data.py                # سكربت بايثون لتنظيف وتصدير البيانات
+│   └── delivery_analysis.ipynb        # مفكرة Jupyter للتحليل والاستكشاف وتصدير البيانات
 │
 ├── Dashboard/
 │   └── Olist_Data_Visualization.pbix  # ملف لوحة تحكم Power BI التفاعلية
@@ -97,12 +96,8 @@ Olist_Data_Analysis/
    ```bash
    python load_to_sqlite.py
    ```
-4. تشغيل التحليل واستخراج البيانات:
+4. تشغيل مفكرة Jupyter التفاعلية للتحليل:
    ```bash
-   # لتشغيل السكربت المباشر:
-   python notebooks/analyze_data.py
-
-   # أو لفتح مفكرة Jupyter التفاعلية:
    jupyter notebook notebooks/delivery_analysis.ipynb
    ```
 5. فتح ملف `Dashboard/Olist_Data_Visualization.pbix` باستخدام برنامج **Power BI Desktop** لاستعراض الداشبورد التفاعلي.
