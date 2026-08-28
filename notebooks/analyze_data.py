@@ -7,25 +7,20 @@ db_path = os.path.join(base_dir, 'olist.db')
 sql_path = os.path.join(base_dir, 'sql', 'delivery_analysis.sql')
 output_csv = os.path.join(base_dir, 'Data', 'cleaned_delivery_analysis.csv')
 
+# 1. Read data from database using SQL query
 conn = sqlite3.connect(db_path)
 with open(sql_path, 'r') as f:
     query = f.read()
-
 df = pd.read_sql_query(query, conn)
 conn.close()
 
+# 2. Clean data: remove invalid negative days
 df = df[df['actual_delivery_days'] >= 0].copy()
 
-print("=== Delivery Summary ===")
-print(f"Total delivered orders: {len(df)}")
-print(f"Delayed orders percentage: {(df['delivery_status'] == 'Delayed').mean() * 100:.2f}%\n")
+# 3. Calculate average review score
+print("Average review score by delivery status:")
+print(df.groupby('delivery_status')['review_score'].mean())
 
-print("=== Review Score by Delivery Status ===")
-summary = df.groupby('delivery_status').agg(
-    avg_score=('review_score', 'mean'),
-    order_count=('order_id', 'count')
-).reset_index()
-print(summary)
-
+# 4. Save clean data for Power BI
 df.to_csv(output_csv, index=False)
-print(f"\nCleaned dataset saved to: {output_csv}")
+print("\nClean data saved successfully!")
